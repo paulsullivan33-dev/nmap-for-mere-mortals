@@ -1,0 +1,76 @@
+The lab — what the specimen listeners are
+====================================================================
+
+One file: lab_server.py. It stands up four
+small services on the machine you run it on,
+so that every scan in this guide is aimed at
+something of yours. Nothing in it is a real
+production service, and one of them is
+deliberately wearing a costume.
+
+
+tcp/8080 — the web specimen
+    A tiny web server (Python's http.server
+    with a name tag that reads "LabHTTP/1.0")
+    serving one invented page titled
+    "Lab Web - Specimen Page". This is the
+    port the version-detection and web-script
+    chapters practise on.
+
+tcp/8022 — the banner specimen
+    A socket that answers every connection
+    with one line — "SSH-2.0-OpenSSH_9.6p1
+    LabSSH" — and then politely ignores you.
+    There is NO SSH server behind it. It
+    exists so the guide can show what a
+    banner proves (something sent those
+    bytes) and what it does not (that the
+    something is really SSH).
+
+tcp/8888 — the chat specimen
+    Greets you with "LABCHAT 1.0 ready",
+    echoes one line back, and hangs up.
+    No standard service name belongs to
+    this port, which makes it the guide's
+    honest example of nmap's service column
+    saying "unknown" — until version
+    detection asks the port itself.
+
+udp/53535 — the UDP specimen
+    Answers any datagram with "lab-udp
+    alive". UDP has no connections and no
+    banners, so a reply of any kind is the
+    only proof of life a UDP scan can get —
+    this listener provides one.
+
+Deliberately closed
+    tcp/59999 and udp/59998 have nothing
+    listening. The guide needs a genuinely
+    closed port to show what "closed" looks
+    like beside "open" and "filtered", so
+    these two numbers are reserved by
+    doing nothing at all. If something on
+    your machine already uses one of them,
+    pick another high number nothing uses
+    and scan that instead.
+
+Starting and stopping
+    python3 lab_server.py          (foreground;
+                                    Ctrl-C stops)
+    python3 lab_server.py --check  (prints the
+                                    plan, starts
+                                    nothing)
+
+The listeners bind to all local interfaces,
+so they answer on 127.0.0.1 and on the
+machine's own network address. That second
+address is the guide's "second machine": one
+box, two doors, and the scans honestly
+differ between them.
+
+The rule that comes with the lab
+    Scan only machines and networks you own,
+    or that you have explicit permission to
+    scan. The lab exists so that rule costs
+    you nothing: every target in this guide
+    is the machine the lab is running on.

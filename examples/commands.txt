@@ -1,0 +1,110 @@
+Nmap commands — the everyday set from
+"Nmap for Mere Mortals"
+====================================================================
+
+Every output quoted in the guide was captured
+from Nmap 7.94SVN on the build machine, run
+against the specimen lab in this directory
+(see lab-notes.txt). All targets are the
+machine the lab runs on — the only kind of
+target this guide uses.
+
+
+FIRST SCANS
+-----------
+    nmap --version              which nmap this is
+    nmap -sT 127.0.0.1          connect scan, the
+                                1,000 common ports
+    nmap -sT -p 8080,8022,8888,59999 127.0.0.1
+                                just the lab ports
+
+
+READING THE REPORT
+------------------
+    nmap -sT -p 8080,8022,8888,59999 --reason 127.0.0.1
+                                verdicts with the
+                                evidence (syn-ack,
+                                conn-refused)
+    iptables -A INPUT -p tcp --dport 8888 -j DROP
+                                make one port silent
+                                (root, your machine,
+                                your rule to remove)
+    nmap -sT -p 8888 --reason 127.0.0.1
+                                ... it now reads
+                                filtered / no-response
+    iptables -D INPUT -p tcp --dport 8888 -j DROP
+                                put it back
+
+
+CHOOSING PORTS
+--------------
+    nmap -sT -p 8000-8100 127.0.0.1     a range
+    nmap -sT --top-ports 10 127.0.0.1   the world's
+                                        ten favourites
+    nmap -sT -F 127.0.0.1       the fast 100
+    nmap -sT -p- 127.0.0.1      all 65,535
+
+
+HOST DISCOVERY
+--------------
+    nmap -sn 127.0.0.1          is it up? (no ports)
+    nmap -sn -n 127.0.0.0/24    the neighbourhood —
+                                on loopback, all 256
+                                are you
+    nmap -Pn -sT -p 8080 127.0.0.99
+                                skip the census,
+                                knock anyway
+
+
+SCAN TYPES
+----------
+    nmap -sT -p 8080 127.0.0.1  connect scan: the
+                                ordinary knock
+    nmap -sS -p 8080 --reason 127.0.0.1
+                                SYN scan: half a
+                                handshake, needs raw
+                                sockets (the build
+                                machine's sandbox
+                                refuses them — the
+                                refusal is captured
+                                in the guide)
+    nmap -sU -p 53535,59998 127.0.0.1
+                                UDP: two ports, one
+                                shrug (open|filtered)
+    nmap -sT -T4 -p 8080,8022,8888,59999 127.0.0.1
+                                timing template 4
+
+
+DETECTION
+---------
+    nmap -sT -sV -p 8080,8022,8888,59999 127.0.0.1
+                                ask the ports who
+                                they are (slow —
+                                it talks)
+    nmap -sT -A -p 8080,8022 127.0.0.1
+                                the bundle: versions,
+                                default scripts, OS
+                                guess, traceroute
+    nmap -O 127.0.0.1           OS detection alone
+                                (probes need raw
+                                sends)
+
+
+SCRIPTS
+-------
+    nmap --script-help banner   read before running
+    nmap -sT --script banner -p 8022,8888,8080 127.0.0.1
+    nmap -sT --script http-title -p 8080 127.0.0.1
+    nmap -sT -sC -p 8080,8022,8888 127.0.0.1
+                                the default set
+
+
+OUTPUT
+------
+    nmap -sT -p 8080,8022,8888,59999 -oA out/labscan 127.0.0.1
+                                keep all three shapes
+    grep -c open out/labscan.gnmap
+                                lines, not matches:
+                                it answers 1
+    awk -F'[ /]' '/Ports:/{for(i=1;i<=NF;i++) if($i=="open") c++} END{print c+0}' out/labscan.gnmap
+                                occurrences: 3

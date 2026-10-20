@@ -1,0 +1,24 @@
+site_name: Nmap for Mere Mortals
+site_description: Plain-language nmap. Asking your own machines what is listening, reading port states without fooling yourself, version detection that talks to the service, small scripts, and output that lasts, practised on a lab of specimen listeners you stand up yourself.
+site_url: https://paulsullivan33-dev.github.io/nmap-for-mere-mortals/
+
+# Guides live at the repo root (nice for GitHub browsing).
+# The deploy workflow copies them into docs/ before building.
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+  - What Nmap Is: what-nmap-is.md
+  - First Scans: first-scans.md
+  - "Port States, Honestly": port-states.md
+  - Choosing Ports: choosing-ports.md
+  - Host Discovery: host-discovery.md
+  - Scan Types: scan-types.md
+  - Service and OS Detection: service-and-os-detection.md
+  - "Scripts: The Nmap Scripting Engine": scripts-nse.md
+  - Output That Lasts: output-that-lasts.md
+  - Recipes: recipes.md
+  - Troubleshooting: troubleshooting.md
+  - Glossary: glossary.md
+  - Writing Criteria: criteria.md
