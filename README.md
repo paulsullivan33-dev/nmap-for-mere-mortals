@@ -128,3 +128,19 @@ sitting on. Keep the lab afterwards:
 a server whose answers you *know* is a
 standing rehearsal for the day a real
 one's scan comes back strange.
+
+---
+
+## Part of the series
+
+This guide is one of the [For Mere Mortals](https://paulsullivan33-dev.github.io/mere-mortals/) guides: plain-language guides to the tools programmers and makers use.
+
+Related guides:
+
+- [Netcat for Mere Mortals](https://paulsullivan33-dev.github.io/netcat-for-mere-mortals/)
+- [tcpdump for Mere Mortals](https://paulsullivan33-dev.github.io/tcpdump-for-mere-mortals/)
+- [Wireshark for Mere Mortals](https://paulsullivan33-dev.github.io/wireshark-for-mere-mortals/)
+
+## License
+
+The writing in this guide is licensed under [CC BY 4.0](https://github.com/paulsullivan33-dev/nmap-for-mere-mortals/blob/main/LICENSE). Code examples and lab scripts are licensed under the [MIT License](https://github.com/paulsullivan33-dev/nmap-for-mere-mortals/blob/main/LICENSE-CODE).

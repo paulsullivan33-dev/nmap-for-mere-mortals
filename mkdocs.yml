@@ -1,6 +1,7 @@
 site_name: Nmap for Mere Mortals
 site_description: Plain-language nmap. Asking your own machines what is listening, reading port states without fooling yourself, version detection that talks to the service, small scripts, and output that lasts, practised on a lab of specimen listeners you stand up yourself.
 site_url: https://paulsullivan33-dev.github.io/nmap-for-mere-mortals/
+copyright: 'Part of <a href="https://paulsullivan33-dev.github.io/mere-mortals/">For Mere Mortals</a> · Text <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, code MIT'
 
 # Guides live at the repo root (nice for GitHub browsing).
 # The deploy workflow copies them into docs/ before building.
